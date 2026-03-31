@@ -1,4 +1,5 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
 const pageTitle = "About Me";
 const identity = {
     firstName: "Axi",
@@ -8,33 +9,24 @@ const identity = {
 };
 
 const skills = ["Python", "C#", "JS", "HTML", "CSS", "Astro", "Unity", "Pygame", "Pyqt"];
+
+const skillColor = "red";
+const fontWeight = "bold";
+const textCase = "uppercase";
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-	</head>
-	<body>
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-        <a href="/blog/">Blog</a>
-
-		<h1>My Astro blog</h1>
-        <h1>About Me</h1>
-        <h2>... and my new website built with Astro.</h2>
+<BaseLayout pageTitle={pageTitle}>
+       <h2>... and my new website built with Astro.</h2>
 
         <p>I am working on building a blog using the Astro framework. </p>
         <p>This site will update as i lean more about Astros features.</p>
 
         <p>Here are a few facts about me:</p>
         <ul>
-            <li>My name is {identity.firstName}.</li>
-            <li>I live in {identity.country} and i am a {identity.occupation}.</li>
-            <li>My hobbies are:</li>
+            <li class="items">My name is {identity.firstName}.</li>
+            <li class="items">I live in {identity.country} and i am a {identity.occupation}.</li>
+            <li class="items">My hobbies are:</li>
             <ul>
                  {identity.hobbies.length >= 2 &&
                 identity.hobbies.map((hobby) => <li>{hobby}</li>)
@@ -43,8 +35,23 @@ const skills = ["Python", "C#", "JS", "HTML", "CSS", "Astro", "Unity", "Pygame",
         </ul>
         <p>My skills are:</p>
         <ul>
-            { skills.map((skill) => <li>{skill}</li>)
-            }  
+            { skills.map((skill) => <li class="skill">{skill}</li>)}  
         </ul>
-	</body>
-</html>
+    <!-- Page-specific Styles -->
+    <style define:vars={{skillColor, fontWeight, textCase}}>
+        .skill{
+            color: var(--skillColor);
+            font-weight: var(--fontWeight, "bold");
+            text-transform: var(--textCase, "uppercase");
+        }
+    </style>
+    <!-- Styles that must affect layout elements (like the h1) -->
+    <!-- global : overwrite -->
+    <style is:global> 
+        h1{
+            color: purple;
+            font-size: 4rem;
+        }
+    <style>
+
+</BaseLayout>
