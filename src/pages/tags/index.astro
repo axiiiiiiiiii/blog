@@ -1,11 +1,9 @@
 ---
 
 import BaseLayout from "../../layouts/BaseLayout.astro";
-const allPosts = Object.values(import.meta.glob("../posts/*.md", { eager: true }));
+const allPosts = Object.values(import.meta.glob("../posts/*.md", { eager: true}));
 const tags = [...new Set(allPosts.map((post: any) => post.frontmatter.tags).flat())]
-const pageTitle = "Tag Index";
-
-
+const pageTitle = "Tag Index"
 ---
 
 <BaseLayout pageTitle={pageTitle}>
@@ -15,20 +13,21 @@ const pageTitle = "Tag Index";
 </BaseLayout>
 
 <style>
-    a{
-        color:00539f;
+    a {
+        color: #00539f;
     }
-    .tags{
+
+    .tags {
         display: flex;
         flex-wrap: wrap;
     }
 
-    .tag{
+    .tag {
         margin: 0.25em;
         border: dotted 1px #a1a1a1;
-        border-radius: ;
+        border-radius: 0.5em;
         padding: 0.5em 1em;
         font-size: 1.15em;
-        background-color: F8FCFD;
+        background-color: #F8FCFD;
     }
 </style>
